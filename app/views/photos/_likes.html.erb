@@ -5,13 +5,22 @@
     <% like = current_user.likes.find_by(photo: photo) %>
 
     <% if like %>
-      <%= link_to like, class: "btn btn-link link-underline-dark link-underline link-underline-opacity-0 link-underline-opacity-100-hover", data: { turbo_method: :delete } do %>
-        <i class="fas fa-heart fa-fw"></i>
-
-        Un-like
+      <%= button_to like_path(like),
+                    method: :delete,
+                    remote: true,
+                    form: { id: "unlike-form-#{photo.id}" },
+                    class: "btn btn-link link-underline-dark link-underline link-underline-opacity-0 link-underline-opacity-100-hover" do %>
+        <i class="fas fa-heart fa-fw"></i> Un-like
       <% end %>
     <% else %>
-      <%= render "likes/form", like: photo.likes.build(fan: current_user) %>
+      <%= button_to likes_path,
+                    method: :post,
+                    remote: true,
+                    params: { like: { photo_id: photo.id, fan_id: current_user.id } },
+                    form: { id: "like-form-#{photo.id}" },
+                    class: "btn btn-link link-underline link-underline-opacity-0 link-underline-opacity-100-hover" do %>
+        <i class="far fa-heart fa-fw"></i> Like
+      <% end %>
     <% end %>
   </div>
 </div>
