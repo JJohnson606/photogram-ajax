@@ -1,5 +1,3 @@
-console.log("bye comment!")
 $("#<%= dom_id(@comment) %>").fadeOut('slow', function() {
   $(this).remove();
 });
-console.log("successfully destroyed.")

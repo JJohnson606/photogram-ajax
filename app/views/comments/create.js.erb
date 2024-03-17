@@ -1,4 +1,3 @@
-
 var added_comment = $("<%= j(render @comment) %>");
 
 added_comment.hide();
@@ -9,4 +8,4 @@ added_comment.slideDown();
 
 $("#<%= dom_id(@comment.photo) %>_new_comment_form #comment_body").val("");
 
-console.log("successfully created")
+
