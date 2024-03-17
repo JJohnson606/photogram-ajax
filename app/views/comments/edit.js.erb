@@ -1,0 +1,4 @@
+$("#<%= dom_id(@comment) %>").slideUp('slow', function() {
+  $(this).replaceWith("<%= j(render 'form', comment: @comment) %>").slideDown('slow');
+});
+

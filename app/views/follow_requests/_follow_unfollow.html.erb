@@ -2,16 +2,10 @@
   <% follow_request = current_user.sent_follow_requests.find_by(recipient: recipient) %>
 
   <% if follow_request %>
-    <% if follow_request.pending? %>
-      <%= link_to follow_request,  data: { turbo_method: :delete }, class: "btn btn-outline-secondary" do %>
-        Un-request
-      <% end %>
-    <% elsif follow_request.accepted? %>
-      <%= link_to follow_request,  data: { turbo_method: :delete }, class: "btn btn-outline-secondary" do %>
-        Un-follow
-      <% end %>
+    <%= link_to follow_request, class: "#{dom_id(follow_request)} btn btn-outline-secondary", remote: true, method: :delete do %>
+      <%= follow_request.pending? ? 'Un-request' : 'Un-follow' %>
     <% end %>
   <% else %>
     <%= render "follow_requests/form", follow_request: recipient.received_follow_requests.build %>
-  <% end %>
+  <% end %> 
 <% end %>

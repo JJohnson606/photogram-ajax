@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resources :comments
   resources :follow_requests
   resources :likes
-  resources :photos
+  resources :photos do
+  resources :likes, only: [:create, :destroy]
+  end
 
   get ":username" => "users#show", as: :user
   get ":username/liked" => "users#liked", as: :liked
